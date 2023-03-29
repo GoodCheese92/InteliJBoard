@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../embedded_LSJ_JSP/work/Ex_0327_Board/WebContent/WEB-INF/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../embedded_LSJ_JSP/work/Ex_0327_Board/WebContent/WEB-INF/lib" recursive="false" />
+  </library>
+</component>
