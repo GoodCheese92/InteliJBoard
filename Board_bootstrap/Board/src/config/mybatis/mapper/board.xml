@@ -7,6 +7,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from board
     </select>
 
+    <insert id="board_insert" parameterType="vo.BoardVO">
+        insert INTO board values (seq_board_idx.nextVal,
+                                  #{name},
+                                  #{subject},
+                                  #{content},
+                                  #{pwd},
+                                  #{ip},
+                                  sysdate,
+                                  0,
+                                  seq_board_idx.currVal,
+                                  0,
+                                  0,
+                                  0 )
+    </insert>
+
+    <select id="board_selectOne" parameterType="int" resultType="vo.BoardVO">
+        select * from board where idx = #{idx}
+    </select>
 </mapper>
 
 

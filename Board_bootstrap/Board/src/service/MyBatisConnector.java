@@ -28,7 +28,7 @@ public class MyBatisConnector {
             factory = new SqlSessionFactoryBuilder().build(reader);
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     } // end of constructor
 
