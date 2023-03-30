@@ -8,7 +8,39 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>board_view.jsp</title>
+    <script src="js/httpRequest.js"></script>
+    <script>
+        function send(f){
+            f.method = "get";
+            f.submit();
+        } // end of send()
+
+        // Ajax 써서 삭제해보기
+        function del(){
+            if(!confirm("정말 삭제하시겠습니까?")){
+                return;
+            }
+
+            var url = "board_del.do";
+            var param = "idx=${vo.idx}";
+
+            sendRequest(url, param, resultFn, "GET");
+
+        } // end of del()
+
+        function resultFn(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                var data = xhr.responseText;
+                if(data == 1){
+                    alert("삭제성공");
+                } else{
+                    alert("삭제실패");
+                }
+                location.href="board_list.do";
+            }
+        } // end of resultFn()
+    </script>
 </head>
 <body>
 <table border="1" style="margin: 5px auto;">
@@ -37,8 +69,11 @@
     <tr>
         <td colspan="2">
             <input type="button" value="목록으로 돌아가기" onclick="location.href='board_list.do'">
-            <input type="button" value="답변" onclick="">
-            <input type="button" value="삭제" onclick="">
+            <form action="board_reply.jsp">
+                <input type="button" value="답변" onclick="send(this.form);">
+                <input type="hidden" value="${vo.idx}" name="idx">
+            </form>
+            <input type="button" value="삭제" onclick="del();">
         </td>
     </tr>
 </table>

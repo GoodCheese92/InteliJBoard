@@ -16,6 +16,14 @@ public class BoardViewAction extends HttpServlet {
         int idx = Integer.parseInt(request.getParameter("idx"));
         BoardVO vo = BoardDAO.getInstance().selectOne(idx);
 
+        // 조회수 관리
+        HttpSession session = request.getSession();
+        String check = (String)session.getAttribute("check");
+        if(check==null){
+            BoardDAO.getInstance().update_readhit(idx);
+            session.setAttribute("check", "");
+        }
+
         request.setAttribute("vo", vo);
 
         RequestDispatcher disp = request.getRequestDispatcher("board_view.jsp");

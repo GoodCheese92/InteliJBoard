@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>Title</title>
+        <title>board_list.jsp</title>
     </head>
     <body>
     <table border="1" style="margin: 5px auto;">
@@ -17,7 +17,16 @@
         <c:forEach var="vo" items="${board_list}">
             <tr>
                 <td>${vo.idx}</td>
-                <td><a href="board_view.do?idx=${vo.idx}">${vo.subject}</a></td>
+                <td>
+                    <c:if test="${vo.depth ne 0}">└</c:if>
+                    <c:if test="${vo.del_info ne -1}">
+                        <c:forEach begin="1" end="${vo.depth}">&nbsp;</c:forEach><a href="board_view.do?idx=${vo.idx}">${vo.subject}</a>
+                    </c:if>
+                    <c:if test="${vo.del_info eq -1}">
+                        <font color="gray">삭제된 글입니다.</font>
+                    </c:if>
+
+                </td>
                 <td>${vo.name}</td>
                 <td>${vo.regidate}</td>
                 <td>${vo.readhit}</td>

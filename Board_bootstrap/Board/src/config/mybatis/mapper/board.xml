@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="b">
     <select id="board_list" resultType="vo.BoardVO">
-        select * from board
+        select * from board order by ref desc, step
     </select>
 
     <insert id="board_insert" parameterType="vo.BoardVO">
@@ -25,6 +25,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="board_selectOne" parameterType="int" resultType="vo.BoardVO">
         select * from board where idx = #{idx}
     </select>
+
+    <update id="board_update_step" parameterType="vo.BoardVO">
+        update board set step = step + 1 where ref = #{ref} and step > #{step}
+    </update>
+
+    <insert id="board_insert_reply" parameterType="vo.BoardVO">
+        insert into board values (seq_board_idx.nextVal,
+                                  #{name},
+                                  #{subject},
+                                  #{content},
+                                  #{pwd},
+                                  #{ip},
+                                  sysdate,
+                                  0,
+                                  #{ref},
+                                  #{step},
+                                  #{depth},
+                                  0
+        )
+
+    </insert>
+
+    <!--조회수 업데이트-->
+    <update id="board_update_readhit" parameterType="int">
+        update board set readhit = readhit + 1 where idx = #{idx}
+    </update>
+
+    <!--삭제를 위한 delInfo 업데이트-->
+    <update id="board_update_delInfo" parameterType="int">
+        update board set del_info = -1 where idx = #{idx}
+    </update>
 </mapper>
 
 

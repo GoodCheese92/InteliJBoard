@@ -16,8 +16,10 @@ public class BoardListAction extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<BoardVO> board_list = BoardDAO.getInstance().selectList();
 
+        // 조회수 세션 체크 해제
+        request.getSession().removeAttribute("check");
+
         request.setAttribute("board_list", board_list);
-        System.out.println("board_list.do 잘 실행됨");
         RequestDispatcher disp = request.getRequestDispatcher("board_list.jsp");
         disp.forward(request, response);
     } // end of service
