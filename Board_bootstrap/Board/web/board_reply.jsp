@@ -42,6 +42,7 @@
     <table border="1" style="margin: 5px auto;">
         <caption>:::댓글 작성:::</caption>
         <input type="hidden" name="idx" value="${param.idx}">
+        <input type="hidden" name="page" value="${param.page}">
 
         <tr>
             <th>제목</th>

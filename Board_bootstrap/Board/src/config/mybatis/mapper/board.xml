@@ -7,6 +7,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from board order by ref desc, step
     </select>
 
+    <select id="board_list_page" resultType="vo.BoardVO" parameterType="java.util.HashMap">
+        select * from
+        (select RANK() OVER(order by REF desc, step) no, b.* from
+        ( select * from board
+        <trim prefix="where" prefixOverrides="or|and">
+            <if test="name != null">
+                name Like '%'||#{name}||'%'
+            </if>
+            <if test="subject != null">
+                or subject Like '%'||#{subject}||'%'
+            </if>
+            <if test="content != null">
+                content subject Like '%'||#{content}||'%'
+            </if>
+        </trim>
+        )
+        b)
+        where no between #{start} and #{end}
+    </select>
+
     <insert id="board_insert" parameterType="vo.BoardVO">
         insert INTO board values (seq_board_idx.nextVal,
                                   #{name},
@@ -56,6 +76,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="board_update_delInfo" parameterType="int">
         update board set del_info = -1 where idx = #{idx}
     </update>
+
+    <select id="board_count" parameterType="java.util.HashMap" resultType="int">
+        select count(*) from board
+        <trim prefix="where" prefixOverrides="or|and">
+            <if test="name != null">
+                name Like '%'||#{name}||'%'
+            </if>
+            <if test="subject != null">
+                or subject Like '%'||#{subject}||'%'
+            </if>
+            <if test="content != null">
+                content subject Like '%'||#{content}||'%'
+            </if>
+        </trim>
+    </select>
 </mapper>
 
 

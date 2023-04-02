@@ -41,9 +41,11 @@ public class BoardReplyAction extends HttpServlet {
         vo.setStep(step);
         vo.setDepth(depth);
 
+        String page = request.getParameter("page");
+
         int res = BoardDAO.getInstance().insert_reply(vo);
         if(res == 1){
-            response.sendRedirect("board_list.do");
+            response.sendRedirect("board_list.do?page="+page);
         }
 
     } // end of service()

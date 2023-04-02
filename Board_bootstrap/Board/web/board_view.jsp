@@ -37,7 +37,7 @@
                 } else{
                     alert("삭제실패");
                 }
-                location.href="board_list.do";
+                location.href="board_list.do?page=${param.page}";
             }
         } // end of resultFn()
     </script>
@@ -68,10 +68,11 @@
     </tr>
     <tr>
         <td colspan="2">
-            <input type="button" value="목록으로 돌아가기" onclick="location.href='board_list.do'">
+            <input type="button" value="목록으로 돌아가기" onclick="location.href='board_list.do?page=${param.page}'">
             <form action="board_reply.jsp">
                 <input type="button" value="답변" onclick="send(this.form);">
                 <input type="hidden" value="${vo.idx}" name="idx">
+                <input type="hidden" value="${param.page}" name="page">
             </form>
             <input type="button" value="삭제" onclick="del();">
         </td>

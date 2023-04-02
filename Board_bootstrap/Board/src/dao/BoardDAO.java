@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import service.MyBatisConnector;
 import vo.BoardVO;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class BoardDAO {
@@ -33,6 +34,13 @@ public class BoardDAO {
         // System.out.println("selectList() 잘 실행됨");
         return board_list;
     } // end of selectList()
+
+    public List<BoardVO> selectList(HashMap<String, Object> map){
+        SqlSession sqlSession = factory.openSession();
+        List<BoardVO> board_list = sqlSession.selectList("board_list_page", map);
+        sqlSession.close();
+        return board_list;
+    } // end of selecList(HashMap map)
 
     public int insert(BoardVO vo){
         SqlSession sqlSession = factory.openSession(true);
@@ -80,6 +88,13 @@ public class BoardDAO {
         sqlSession.close();
         return res;
     } // end of update_delInfo()
+
+    public int getRowTotal(HashMap<String, Object> map){
+        SqlSession sqlSession = factory.openSession();
+        int res = sqlSession.selectOne("b.board_count", map);
+        sqlSession.close();
+        return res;
+    }
 } // end of class
 
 
