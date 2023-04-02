@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "BoardDelAction", value = "/board_del.do")
 public class BoardDelAction extends HttpServlet {
+    // asdasd
     @Override 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // board_del.do?idx=86
