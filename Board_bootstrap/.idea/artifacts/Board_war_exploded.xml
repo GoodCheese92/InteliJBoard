@@ -8,9 +8,10 @@
           <element id="module-output" name="Board_bootstrap" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="annotations-api" />
           <element id="library" level="project" name="mybatis-3.1.1" />
-          <element id="library" level="project" name="taglibs-standard-impl-1.2.5" />
-          <element id="library" level="project" name="commons-collections-3.2.1" />
+          <element id="library" level="project" name="servlet-api" />
+          <element id="library" level="project" name="lib" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="Board/web/Web" />

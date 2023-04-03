@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>board_insert_form.jsp</title>
-
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script>
         function send(f){
             // 유효성 검사
@@ -39,7 +39,7 @@
 </head>
 <body>
 <form action="board_insert.do">
-    <table border="1" style="margin: 5px auto;">
+    <table border="1" class="table">
         <caption>:::내용 작성:::</caption>
         <tr>
             <th>제목</th>
@@ -62,5 +62,6 @@
         </tr>
     </table>
 </form>
+<script src="js/bootstrap.js"></script>
 </body>
 </html>
